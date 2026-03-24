@@ -46,7 +46,14 @@ const Footer = () => (
           <p className="text-sm text-[#968972] mb-4 leading-relaxed">
             Explore our full range of premium door systems and wardrobes.
           </p>
-          <button className="border border-[#879E82] text-[#879E82] px-6 py-2.5 text-xs tracking-[0.2em] uppercase hover:bg-[#879E82] hover:text-white transition-all duration-300">
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              const evt = new CustomEvent("openCatalogueModal");
+              window.dispatchEvent(evt);
+            }}
+            className="border border-[#879E82] text-[#879E82] px-6 py-2.5 text-xs tracking-[0.2em] uppercase hover:bg-[#879E82] hover:text-white transition-all duration-300"
+          >
             Download Now
           </button>
         </div>

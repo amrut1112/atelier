@@ -3,9 +3,9 @@ import Navbar from "@/components/Navbar";
 import HeroCarousel from "@/components/HeroCarousel";
 import OrangeBanner from "@/components/OrangeBanner";
 import AboutSection from "@/components/AboutSection";
+import StatsCounter from "@/components/StatsCounter";
 import VisionCards from "@/components/VisionCards";
 import CollectionGrid from "@/components/CollectionGrid";
-import AtelierProducts from "@/components/AtelierProducts";
 import WorkingProcess from "@/components/WorkingProcess";
 import MaterialsSection from "@/components/MaterialsSection";
 import BlogSection from "@/components/BlogSection";
@@ -23,7 +23,13 @@ const Index = () => {
       { threshold: 0.12 }
     );
     document.querySelectorAll(".reveal, .reveal-left, .reveal-right").forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+
+    const openListener = () => {};
+    window.addEventListener("openCatalogueModal", openListener);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("openCatalogueModal", openListener);
+    };
   }, []);
 
   return (
@@ -33,8 +39,8 @@ const Index = () => {
       <OrangeBanner />
       <AboutSection />
       <VisionCards />
+      <StatsCounter />
       <CollectionGrid />
-      <AtelierProducts />
       <WorkingProcess />
       <MaterialsSection />
       <BlogSection />

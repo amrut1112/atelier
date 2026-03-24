@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import p1 from "@/assets/folding door.jpg";
 import p2 from "@/assets/sliding door.jpg";
 import p3 from "@/assets/wardrobe.jpg";
@@ -9,17 +10,18 @@ import p7 from "@/assets/led mirror.jpg";
 import p8 from "@/assets/synchro.jpg";
 
 const items = [
-  { image: p1, name: "Folding Door", tag: "New Arrival" },
-  { image: p2, name: "Sliding Door", tag: "New Arrival" },
-  { image: p3, name: "Atelier Wardrobe", tag: "New Arrival" },
-  { image: p4, name: "Fixed Partition", tag: "New Arrival" },
-  { image: p6, name: "Ghost Door", tag: "New Arrival" },
-  { image: p7, name: "LED Mirror", tag: "New Arrival" },
-  { image: p8, name: "Synchro", tag: "New Arrival" },
+  { image: p1, name: "Folding Door", tag: "New Arrival", slug: "folding-door" },
+  { image: p2, name: "Sliding Door", tag: "New Arrival", slug: "sliding-door" },
+  { image: p3, name: "Atelier Wardrobe", tag: "New Arrival", slug: "wardrobe" },
+  { image: p4, name: "Fixed Partition", tag: "New Arrival", slug: "fixed-partition" },
+  { image: p6, name: "Ghost Door", tag: "New Arrival", slug: "ghost-door" },
+  { image: p7, name: "LED Mirror", tag: "New Arrival", slug: "led-mirror" },
+  { image: p8, name: "Synchro", tag: "New Arrival", slug: "synchro" },
 ];
 
 const CollectionGrid = () => {
   const [active, setActive] = useState(0);
+  const navigate = useNavigate();
   const prev = () => setActive((p) => (p - 1 + items.length) % items.length);
   const next = () => setActive((p) => (p + 1) % items.length);
 
@@ -46,12 +48,11 @@ const CollectionGrid = () => {
               <div
                 key={idx}
                 onClick={() => {
-                  setActive(idx);
-                  if (items[idx].name === "Sliding Door") {
-                    const target = document.getElementById("products");
-                    if (target) {
-                      target.scrollIntoView({ behavior: "smooth", block: "start" });
-                    }
+                  if (isCenter) {
+                    navigate(`/products/${items[idx].slug}`);
+                    window.scrollTo(0, 0);
+                  } else {
+                    setActive(idx);
                   }
                 }}
                 className={`relative cursor-pointer rounded-lg overflow-hidden transition-all duration-500 flex-shrink-0

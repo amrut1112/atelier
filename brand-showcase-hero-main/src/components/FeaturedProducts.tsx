@@ -1,35 +1,88 @@
-import foldingImg from "@/assets/folding door.jpg";
-import slidingImg from "@/assets/sliding door.jpg";
-import openableImg from "@/assets/openable door.jpg";
-import ghostImg from "@/assets/ghost door.jpg";
-import fixedImg from "@/assets/fix partition.jpg";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
-const products = [
-  { image: foldingImg, name: "Folding Door" },
-  { image: slidingImg, name: "Sliding Door" },
-  { image: openableImg, name: "Openable Door" },
-  { image: ghostImg, name: "Ghost Door" },
-  { image: fixedImg, name: "Fixed Partition" },
-];
+interface Product {
+  id: string;
+  name: string;
+  description: string;
+  image_url: string;
+  category: string;
+  price: number;
+  featured: boolean;
+}
 
-const FeaturedProducts = () => (
-  <section className="py-16 bg-background">
-    <div className="container mx-auto px-4">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {products.map((p) => (
-          <div key={p.name} className="relative group rounded-xl overflow-hidden shadow-lg">
-            <img
-              src={p.image}
-              alt={p.name}
-              className="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 to-transparent" />
-            <h3 className="absolute bottom-4 left-4 text-primary-foreground text-lg font-semibold font-display">
-              {p.name}
-            </h3>
+const FeaturedProducts = () => {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('products')
+          .select('*')
+          .eq('featured', true)
+          .order('created_at', { ascending: false });
+
+        if (error) throw error;
+        setProducts(data || []);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+        // Fallback to hardcoded data if database fails
+        setProducts([
+          { id: '1', name: 'Folding Door', description: '', image_url: '/assets/folding door.jpg', category: 'doors', price: 25000, featured: true },
+          { id: '2', name: 'Sliding Door', description: '', image_url: '/assets/sliding door.jpg', category: 'doors', price: 30000, featured: true },
+          { id: '3', name: 'Openable Door', description: '', image_url: '/assets/openable door.jpg', category: 'doors', price: 20000, featured: true },
+          { id: '4', name: 'Ghost Door', description: '', image_url: '/assets/ghost door.jpg', category: 'doors', price: 35000, featured: true },
+          { id: '5', name: 'Fixed Partition', description: '', image_url: '/assets/fix partition.jpg', category: 'partitions', price: 15000, featured: true },
+        ]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  if (loading) {
+    return (
+      <section className="py-16 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[...Array(5)].map((_, i) => (
+              <div key={i} className="relative group rounded-xl overflow-hidden shadow-lg bg-muted animate-pulse h-72" />
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section className="py-16 bg-background">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {products.map((product) => (
+            <div key={product.id} className="relative group rounded-xl overflow-hidden shadow-lg">
+              <img
+                src={product.image_url}
+                alt={product.name}
+                className="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 to-transparent" />
+              <div className="absolute bottom-4 left-4 right-4">
+                <h3 className="text-primary-foreground text-lg font-semibold font-display mb-1">
+                  {product.name}
+                </h3>
+                {product.price && (
+                  <p className="text-primary-foreground/80 text-sm">
+                    ₹{product.price.toLocaleString()}
+                  </p>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
 
       {/* Instagram Reel */}
       <div className="mt-16 flex flex-col items-center">

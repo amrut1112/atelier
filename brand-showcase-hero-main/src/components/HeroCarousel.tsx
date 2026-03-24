@@ -6,17 +6,17 @@ import heroImg2 from "@/assets/hero-2.jpg";
 const slides = [
   {
     image: heroImg1,
-    tag: "India Ka #1 Door System",
-    title: "Crafted for Modern Living",
+    tag: "Atelier",
+    title: "Where Spaces Are Felt, Not Just Built",
     description:
-      "Your wardrobe isn't just storage — it's a reflection of your style. Atelier blends innovative functionality with sophisticated design to create spaces that are uniquely yours.",
+      "We design and engineer modern door and partition systems that don’t just fit your home — they become a part of how you live in it.",
   },
   {
     image: heroImg2,
-    tag: "Where Craft Meets Engineering",
-    title: "Uniqueness in Every Design",
+    tag: "Atelier",
+    title: "Designed for the Way You Live",
     description:
-      "From sliding doors to walk-in wardrobes, we craft premium modular solutions for every home across India. Smart design. Lasting quality. Built around you.",
+      "Atelier creates refined door and partition systems that blend seamlessly into your space — crafted with precision, built to elevate everyday living.",
   },
 ];
 
@@ -53,7 +53,7 @@ const HeroCarousel = () => {
                 </a>
                 <a href="#contact-us"
                   className="inline-block border border-[#C9B898]/40 text-[#C9B898] px-8 py-3 text-xs tracking-[0.2em] uppercase font-body hover:border-[#C9B898] transition-all duration-300">
-                  Get a Quote
+                  Get Consultation
                 </a>
               </div>
             </div>

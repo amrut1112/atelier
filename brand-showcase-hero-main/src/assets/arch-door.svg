@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 900" width="320" height="900">
+  <defs>
+    <!-- Ribbed glass texture -->
+    <pattern id="ribs" x="0" y="0" width="6" height="900" patternUnits="userSpaceOnUse">
+      <rect width="3" height="900" fill="rgba(255,255,255,0.18)"/>
+      <rect x="3" width="3" height="900" fill="rgba(200,210,205,0.08)"/>
+    </pattern>
+    <!-- Subtle light gradient -->
+    <linearGradient id="glassGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#d8ddd8" stop-opacity="0.95"/>
+      <stop offset="40%" stop-color="#e8ece8" stop-opacity="0.9"/>
+      <stop offset="70%" stop-color="#f2f0ec" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#c8ccc8" stop-opacity="0.9"/>
+    </linearGradient>
+    <!-- Bottom warm light -->
+    <linearGradient id="bottomLight" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="60%" stop-color="transparent"/>
+      <stop offset="100%" stop-color="rgba(220,210,185,0.55)"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Glass background -->
+  <rect width="320" height="900" fill="url(#glassGrad)"/>
+  <!-- Ribbed texture overlay -->
+  <rect width="320" height="900" fill="url(#ribs)"/>
+  <!-- Bottom warm glow -->
+  <rect width="320" height="900" fill="url(#bottomLight)"/>
+
+  <!-- ═══ MATTE BLACK FRAME & GEOMETRY ═══ -->
+  <!-- stroke style: matte black, rounded joins -->
+  <g fill="none" stroke="#1a1a1a" stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- Outer frame -->
+    <rect x="5" y="5" width="310" height="890" stroke-width="10"/>
+
+    <!-- Horizontal rail 1 — top section divider -->
+    <line x1="5" y1="130" x2="315" y2="130" stroke-width="7"/>
+
+    <!-- Horizontal rail 2 — mid section divider -->
+    <line x1="5" y1="310" x2="315" y2="310" stroke-width="7"/>
+
+    <!-- Vertical spine — right of center -->
+    <line x1="210" y1="5" x2="210" y2="130" stroke-width="7"/>
+
+    <!-- Vertical spine — continues below rail 1 -->
+    <line x1="210" y1="130" x2="210" y2="895" stroke-width="7"/>
+
+    <!-- ── TOP SECTION (y: 5–130) ── -->
+    <!-- Small top-right arch (quarter circle, top-right corner) -->
+    <path d="M210 60 Q210 10 260 10" stroke-width="5"/>
+    <!-- Top horizontal sub-rail -->
+    <line x1="5" y1="60" x2="210" y2="60" stroke-width="4"/>
+
+    <!-- ── UPPER ARCH (y: 130–310) ── -->
+    <!-- Large arch — spans full width, peaks near top of section -->
+    <path d="M30 310 L30 230 Q30 145 160 145 Q290 145 290 230 L290 310" stroke-width="6"/>
+
+    <!-- ── LOWER ARCHES (y: 310–895) ── -->
+    <!-- Outer arch -->
+    <path d="M30 895 L30 620 Q30 380 160 380 Q290 380 290 620 L290 895" stroke-width="6"/>
+
+    <!-- Middle arch -->
+    <path d="M70 895 L70 660 Q70 460 160 460 Q250 460 250 660 L250 895" stroke-width="5"/>
+
+    <!-- Inner arch -->
+    <path d="M110 895 L110 700 Q110 540 160 540 Q210 540 210 700 L210 895" stroke-width="4"/>
+
+    <!-- Vertical side rails in lower section -->
+    <line x1="30" y1="310" x2="30" y2="895" stroke-width="5"/>
+    <line x1="290" y1="310" x2="290" y2="895" stroke-width="5"/>
+
+    <!-- Handle (left side, mid height) -->
+    <rect x="8" y="420" width="6" height="80" rx="3" fill="#1a1a1a" stroke="none"/>
+  </g>
+
+  <!-- Subtle inner shadow on edges for depth -->
+  <rect width="320" height="900" fill="none" stroke="rgba(0,0,0,0.12)" stroke-width="20"/>
+</svg>

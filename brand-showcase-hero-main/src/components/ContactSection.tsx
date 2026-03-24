@@ -11,16 +11,24 @@ const ContactSection = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const { error } = await supabase.from("contact_submissions").insert({
+      const { data, error } = await supabase.from("contact_submissions").insert({
         name: form.name.trim(),
         email: form.email.trim(),
         phone: form.phone.trim() || null,
         message: `Subject: ${form.subject}\n\n${form.message}`.trim(),
       });
-      if (error) throw error;
+
+      if (error) {
+        console.error("Contact submission failed:", error);
+        toast.error(`Error sending message: ${error.message || error.details || "Please try again."}`);
+        return;
+      }
+
+      console.info("Contact submission succeeded:", data);
       toast.success("Thank you! We'll get back to you soon.");
       setForm({ name: "", email: "", phone: "", subject: "", message: "" });
-    } catch {
+    } catch (caughtError) {
+      console.error("Unexpected contact submission error:", caughtError);
       toast.error("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
