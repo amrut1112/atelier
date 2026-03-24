@@ -167,7 +167,7 @@ const CatalogueModal = ({ open, onClose }: CatalogueModalProps) => {
         {/* ── LEFT DOOR ── */}
         <div
           className="absolute inset-y-0 left-0 z-20"
-          style={{ width: "50%", transition: doorTransition, transform: leftTransform }}
+          style={{ width: "50%", transition: doorTransition, transform: leftTransform, background: "#f5f3ef" }}
         >
           <DoorSVG side="left" />
         </div>
@@ -175,7 +175,7 @@ const CatalogueModal = ({ open, onClose }: CatalogueModalProps) => {
         {/* ── RIGHT DOOR ── */}
         <div
           className="absolute inset-y-0 right-0 z-20"
-          style={{ width: "50%", transition: doorTransition, transform: rightTransform }}
+          style={{ width: "50%", transition: doorTransition, transform: rightTransform, background: "#f5f3ef" }}
         >
           <DoorSVG side="right" />
         </div>
@@ -193,7 +193,7 @@ const DoorSVG = ({ side }: { side: "left" | "right" }) => (
     preserveAspectRatio="none"
     style={{ display: "block", transform: side === "right" ? "scaleX(-1)" : "none" }}
   >
-    <rect x="6" y="6" width="328" height="488" fill="rgba(240,238,234,0.08)" />
+    <rect x="6" y="6" width="328" height="488" fill="rgba(240,238,234,0.95)" />
     <g fill="none" stroke="#1a1a1a" strokeLinecap="round" strokeLinejoin="round">
       <rect x="4" y="4" width="332" height="492" strokeWidth="10" />
       <line x1="4" y1="135" x2="336" y2="135" strokeWidth="7" />

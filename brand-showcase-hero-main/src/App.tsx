@@ -12,6 +12,7 @@ import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import CatalogueModal from "@/components/CatalogueModal";
+import PageTransition from "@/components/PageTransition";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <GlobalCatalogueModal />
+        <PageTransition />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />

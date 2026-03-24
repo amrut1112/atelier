@@ -186,7 +186,6 @@ const ProductPage = () => {
 
   return (
     <div className="min-h-screen" style={{ background: "#f5f3ef" }}>
-      <GhostDoorReveal color={product.color} />
       <Navbar />
 
       {/* ── HERO ── */}
